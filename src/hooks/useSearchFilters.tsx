@@ -1,10 +1,13 @@
-import { useState, useCallback } from 'react';
-import { useLocalStorage } from './useLocalStorage';
-import type {SavedFilter, SearchFilters} from "@/types";
-// import type { SearchFilters, SavedFilter } from '../types/filters';
+import { useState, useCallback, useEffect } from 'react';
+import type { SavedFilter, SearchFilters } from '@/types/filters';
+import * as filterService from '@/services/filterService';
+import { useAuth } from '@/context/AuthContext';
+
+const MAX_FILTERS = 3;
 
 export function useSearchFilters() {
-    const [savedFilters, setSavedFilters] = useLocalStorage<SavedFilter[]>('savedFilters', []);
+    const { user } = useAuth();
+    const [savedFilters, setSavedFilters] = useState<SavedFilter[]>([]);
     const [currentFilters, setCurrentFilters] = useState<SearchFilters>({
         timeFilter: null,
         domainFilter: null,
@@ -12,19 +15,35 @@ export function useSearchFilters() {
         searchQuery: '',
     });
 
-    const saveCurrentFilters = useCallback((name: string) => {
+    useEffect(() => {
+        const loadFilters = async () => {
+            const filters = await filterService.getFilters(user?.userId ?? null);
+            setSavedFilters(filters);
+        };
+        loadFilters();
+    }, [user?.userId]);
+
+    const saveCurrentFilters = useCallback(async (name: string) => {
+        if (savedFilters.length >= MAX_FILTERS) {
+            throw new Error(`You can only save up to ${MAX_FILTERS} filters`);
+        }
+
         const newFilter: SavedFilter = {
             ...currentFilters,
             id: crypto.randomUUID(),
             name,
             createdAt: Date.now(),
+            hasNotification: false,
         };
-        setSavedFilters(prev => [...prev, newFilter]);
-    }, [currentFilters, setSavedFilters]);
 
-    const deleteSavedFilter = useCallback((id: string) => {
+        await filterService.saveFilter(user?.userId ?? null, newFilter);
+        setSavedFilters(prev => [...prev, newFilter]);
+    }, [currentFilters, savedFilters.length, user?.userId]);
+
+    const deleteSavedFilter = useCallback(async (id: string) => {
+        await filterService.deleteFilter(user?.userId ?? null, id);
         setSavedFilters(prev => prev.filter(filter => filter.id !== id));
-    }, [setSavedFilters]);
+    }, [user?.userId]);
 
     const applySavedFilter = useCallback((filter: SavedFilter) => {
         setCurrentFilters({
@@ -36,8 +55,23 @@ export function useSearchFilters() {
     }, []);
 
     const updateCurrentFilters = useCallback((updates: Partial<SearchFilters>) => {
-        setCurrentFilters((prev: any) => ({ ...prev, ...updates }));
+        setCurrentFilters(prev => ({ ...prev, ...updates }));
     }, []);
+
+    const toggleFilterNotification = useCallback(async (id: string) => {
+        const filter = savedFilters.find(f => f.id === id);
+        if (!filter) return;
+
+        const updatedFilter = {
+            ...filter,
+            hasNotification: !filter.hasNotification,
+        };
+
+        await filterService.updateFilter(user?.userId ?? null, updatedFilter);
+        setSavedFilters(prev => prev.map(f =>
+            f.id === id ? updatedFilter : f
+        ));
+    }, [savedFilters, user?.userId]);
 
     return {
         savedFilters,
@@ -46,5 +80,7 @@ export function useSearchFilters() {
         deleteSavedFilter,
         applySavedFilter,
         updateCurrentFilters,
+        toggleFilterNotification,
+        canAddMore: savedFilters.length < MAX_FILTERS,
     };
 }

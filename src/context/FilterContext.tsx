@@ -1,16 +1,8 @@
+'use client';
+
 import React, { createContext, useContext, ReactNode } from 'react';
 import { useSearchFilters } from '@/hooks/useSearchFilters';
-import type {SavedFilter, SearchFilters} from "@/types";
-// import type { SearchFilters, SavedFilter } from '../types/filters';
-
-interface FilterContextType {
-    savedFilters: SavedFilter[];
-    currentFilters: SearchFilters;
-    saveCurrentFilters: (name: string) => void;
-    deleteSavedFilter: (id: string) => void;
-    applySavedFilter: (filter: SavedFilter) => void;
-    updateCurrentFilters: (updates: Partial<SearchFilters>) => void;
-}
+import type { FilterContextType } from '@/types/filters';
 
 const FilterContext = createContext<FilterContextType | null>(null);
 

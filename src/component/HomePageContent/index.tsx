@@ -12,6 +12,7 @@ import {extractDaysAgo, extractDomains, filterJobs} from "@/utils";
 import {Filters} from "@/component/Filters";
 import {JobList} from "@/component/JobList";
 import {SavedFilters} from "@/component/SavedFilters";
+import {UserInfo} from "@/component/UserInfo";
 // import JobCards from "@/component/JobsCards";
 
 function HomePageContent() {
@@ -29,6 +30,7 @@ function HomePageContent() {
         <Container className="py-5">
             <Row>
                 <Col md={12}>
+                    <UserInfo />
                     <SavedFilters />
                     <Filters domains={domains} daysAgo={daysAgo}/>
                     <JobList jobs={filteredJobs} />

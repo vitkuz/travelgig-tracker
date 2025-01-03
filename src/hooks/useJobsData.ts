@@ -3,9 +3,10 @@ import { fetchJobs } from '@/services/jobService';
 import { extractUniqueValues } from '@/utils/filters';
 import type { Job } from '@/types';
 import {getDomain} from "@/utils/getDomain";
-import {getRelativeDateForFilters} from "@/utils/date";
+import {getRelativeDateForFilters} from "@/utils/dateFilters";
+// import {getRelativeDateForFilters} from "@/utils/date";
 
-export function useJobData() {
+export function useJobData(language: 'ru' | 'en' = 'en') {
     const [jobs, setJobs] = useState<Job[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
@@ -18,7 +19,7 @@ export function useJobData() {
                 const jobsWithFields = fetchedJobs.map(job => {
                     const domain = getDomain(job.viewMoreUrl);
                     // const scrapedDaysAgo = getDaysAgo(job.scrapedDateTimestamp);
-                    const scrapedDaysAgo = getRelativeDateForFilters(job.scrapedDateTimestamp);
+                    const scrapedDaysAgo = getRelativeDateForFilters(job.scrapedDateTimestamp, language);
                     return {
                         ...job,
                         domain,
@@ -37,7 +38,7 @@ export function useJobData() {
         }
 
         loadJobs();
-    }, []);
+    }, [language]);
 
     // todo:!
 

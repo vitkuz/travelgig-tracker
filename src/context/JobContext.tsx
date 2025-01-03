@@ -2,11 +2,13 @@ import React, { createContext, useContext, ReactNode } from 'react';
 import { useJobInteractions } from '@/hooks/useJobInteractions';
 import { useJobData } from '@/hooks/useJobsData';
 import type { JobContextType } from '@/types/jobs';
+import {useTranslation} from "@/i18n/context";
 
 const JobContext = createContext<JobContextType | null>(null);
 
 export function JobProvider({ children }: { children: ReactNode }) {
-    const { jobs: fetchedJobs, isLoading, error, filterOptions } = useJobData();
+    const { language } = useTranslation();
+    const { jobs: fetchedJobs, isLoading, error, filterOptions } = useJobData(language);
     const { jobsWithInteractions, handleLike, handleDislike } = useJobInteractions(fetchedJobs);
 
     return (

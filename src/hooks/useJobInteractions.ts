@@ -1,6 +1,7 @@
 import { useLocalStorage } from '@/hooks/useLocalStorage';
 import type { Job, JobWithInteraction } from '@/types';
-import {getRelativeDateForFilters} from '@/utils/date';
+import {getRelativeDateForFilters} from "@/utils/dateFilters";
+// import {getRelativeDateForFilters} from '@/utils/date';
 
 interface JobInteraction {
     liked?: boolean;
@@ -12,7 +13,7 @@ export function useJobInteractions(jobs: Job[]) {
 
     const jobsWithInteractions: JobWithInteraction[] = jobs.map(job => ({
         ...job,
-        scrapedDaysAgo: getRelativeDateForFilters(job.scrapedDateTimestamp),
+        // scrapedDaysAgo: getRelativeDateForFilters(job.scrapedDateTimestamp),
         liked: jobInteractions[job.viewMoreUrl]?.liked || false,
         disliked: jobInteractions[job.viewMoreUrl]?.disliked || false,
     }));

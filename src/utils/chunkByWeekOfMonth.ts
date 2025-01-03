@@ -20,8 +20,7 @@ export const chunkByDaysSinceToday = (data: Job[]): Job[][] => {
 export const getFilters = (jobs: any)  => {
     const uniqueDomains = new Set(
         jobs.map((job: any) => {
-            const hostname = new URL(job.viewMoreUrl).hostname;
-            return hostname.startsWith("www.") ? hostname.slice(4) : hostname;
+            return getDomain(job.viewMoreUrl);
         })
     );
 

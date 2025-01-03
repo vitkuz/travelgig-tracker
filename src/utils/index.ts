@@ -1,5 +1,6 @@
 import {JobWithInteraction} from "@/types";
 import {SearchFilters} from "@/types/filters";
+import {getDomain} from "@/utils/getDomain";
 
 export function filterJobs(
     jobs: JobWithInteraction[],
@@ -8,8 +9,8 @@ export function filterJobs(
     const normalizedQuery = filters.searchQuery.toLowerCase().trim();
 
     return jobs.filter(job => {
-        const daysAgo = job.scrapedDaysAgo;
-        const domain = new URL(job.viewMoreUrl).hostname;
+        // const daysAgo = job.scrapedDaysAgo;
+        // const domain = getDomain(job.viewMoreUrl);
 
         const matchesSearch = !normalizedQuery || [
             job.title,
@@ -22,8 +23,8 @@ export function filterJobs(
 
         return (
             matchesSearch &&
-            (!filters.timeFilter || daysAgo === filters.timeFilter) &&
-            (!filters.domainFilter || domain === filters.domainFilter) &&
+            (!filters.timeFilter || job.scrapedDaysAgo === filters.timeFilter) &&
+            (!filters.domainFilter || job.domain === filters.domainFilter) &&
             (!filters.locationFilter || job.location === filters.locationFilter) &&
             (!filters.showLiked || job.liked)
         );

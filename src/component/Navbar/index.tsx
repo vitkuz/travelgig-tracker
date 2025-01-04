@@ -15,15 +15,15 @@ export function Navbar() {
                 <BSNavbar.Brand className="oswald">Travelgig Tracker</BSNavbar.Brand>
                 <div className="ms-auto d-flex align-items-center gap-3">
                     <LanguageSwitch />
-                    {isLoading && (
-                        <>
-                            <Spinner animation="border" size="sm"/>
-                            <Badge>{t('common.loading')}</Badge>
-                        </>
-                    )}
-                    {(!user?.isAuthenticated || error) && (
-                        <TelegramAuthButton/>
-                    )}
+                    {
+                        isLoading ? (
+                            <>
+                                <Spinner animation="border" size="sm" variant="light"/>
+                            </>
+                        ) : (
+                            !user && <TelegramAuthButton/>
+                        )
+                    }
                     {user?.isAuthenticated && (
                         <>
                             <div className="d-flex align-items-center">

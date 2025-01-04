@@ -9,7 +9,7 @@ const AuthContext = createContext<AuthContextType | null>(null);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [user, setUser] = useState<AuthUser | null>(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
     const { userId, secret } = parseAuthParams();
@@ -48,6 +48,10 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     useEffect(() => {
         if (userId && secret) {
             login(userId, secret)
+        } else {
+            setIsLoading(false);
+            setUser(null);
+            setError(null);
         }
     }, [login, userId, secret]);
 

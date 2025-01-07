@@ -13,9 +13,9 @@ export const en = {
     },
     auth: {
         loginWithTelegram: 'Login with Telegram',
-        userId: 'User ID',
-        credits: 'Credits',
-        availableCredits: 'Available Credits',
+        userId: 'Telegram ID',
+        credits: 'Stars',
+        availableCredits: 'Available Stars',
     },
     filters: {
         title: 'Filters',

@@ -5,6 +5,7 @@ import {JobList} from "@/component/JobList";
 import {SavedFilters} from "@/component/SavedFilters";
 import {Navbar} from "@/component/Navbar";
 import {Footer} from "@/component/Footer";
+import ScrollToTop from "react-scroll-to-top";
 
 function HomePageContent() {
     return (
@@ -20,6 +21,7 @@ function HomePageContent() {
                 </Row>
             </Container>
             <Footer />
+            <ScrollToTop smooth />
         </div>
     );
 }

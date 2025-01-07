@@ -19,7 +19,7 @@ export function Footer() {
                             rel="noopener noreferrer"
                             className="text-light"
                         >
-                            <FontAwesomeIcon icon={faTelegram} size="2x" />
+                            <FontAwesomeIcon icon={faTelegram} size="1x" />
                         </a>
                         <a
                             href="https://www.instagram.com/lily.travelgirl/"
@@ -27,7 +27,7 @@ export function Footer() {
                             rel="noopener noreferrer"
                             className="text-light"
                         >
-                            <FontAwesomeIcon icon={faInstagram} size="2x" />
+                            <FontAwesomeIcon icon={faInstagram} size="1x" />
                         </a>
                     </div>
                     <div className="text-center">

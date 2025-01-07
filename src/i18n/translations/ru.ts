@@ -13,9 +13,9 @@ export const ru = {
     },
     auth: {
         loginWithTelegram: 'Войти через Telegram',
-        userId: 'ID пользователя',
-        credits: 'Кредиты',
-        availableCredits: 'Доступные кредиты',
+        userId: 'Telegram ID',
+        credits: 'Звезды',
+        availableCredits: 'Доступные звезды',
     },
     filters: {
         title: 'Фильтры',

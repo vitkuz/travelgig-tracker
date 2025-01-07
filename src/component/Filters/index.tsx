@@ -50,7 +50,7 @@ export function Filters() {
             </div>
             <div className="mb-4 mt-4">
                 <div className="row g-3">
-                    <div className="col-md-4 d-flex">
+                    <div className="col-md-2 d-flex">
                         <Form.Control
                             type="text"
                             placeholder={t('filters.searchPlaceholder')}

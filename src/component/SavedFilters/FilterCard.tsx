@@ -87,13 +87,16 @@ export function FilterCard({
                         {filter.domainFilter && (
                             <Badge bg="info">{t('filters.domainFilter')}: {filter.domainFilter}</Badge>
                         )}
+                        {filter.industryFilter && (
+                            <Badge bg="info">{t('filters.industryFilter')}: {filter.industryFilter}</Badge>
+                        )}
                         {filter.showLiked && (
                             <Badge bg="info">{t('filters.likedOnly')}</Badge>
                         )}
                         {filter.searchQuery && (
                             <Badge bg="info">{t('filters.searchQuery')}: {filter.searchQuery}</Badge>
                         )}
-                        {!filter.timeFilter && !filter.domainFilter && !filter.showLiked && !filter.searchQuery && (
+                        {!filter.timeFilter && !filter.domainFilter && !filter.industryFilter && !filter.showLiked && !filter.searchQuery && (
                             <span className="text-muted">{t('filters.noActiveFilters')}</span>
                         )}
                     </div>

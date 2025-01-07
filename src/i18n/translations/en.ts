@@ -41,6 +41,7 @@ export const en = {
         createdAt: 'Created {date}',
         timeFilter: 'Time',
         domainFilter: 'Source',
+        industryFilter: 'Industry',
         likedOnly: 'Liked Only',
         searchQuery: 'Search',
         applyFilter: 'Apply Filter',
@@ -54,8 +55,11 @@ export const en = {
         title: 'Jobs',
         showDetails: 'Show Details',
         hideDetails: 'Hide Details',
-        openOn: 'Open on {domain}',
+        openOn: '{domain}',
         jobCount: '{filtered} / {total} jobs',
         noJobsFound: 'No jobs found matching your filters',
     },
+    footer: {
+        copyright: '© 2025 TRAVELGIG ❤️ LILY'
+    }
 };

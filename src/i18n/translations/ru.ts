@@ -41,6 +41,7 @@ export const ru = {
         createdAt: 'Создан {date}',
         timeFilter: 'Время',
         domainFilter: 'Источник',
+        industryFilter: 'Индустрия',
         likedOnly: 'Только понравившиеся',
         searchQuery: 'Поиск',
         applyFilter: 'Применить фильтр',
@@ -54,8 +55,11 @@ export const ru = {
         title: 'Вакансии',
         showDetails: 'Показать детали',
         hideDetails: 'Скрыть детали',
-        openOn: 'Открыть на {domain}',
+        openOn: '{domain}',
         jobCount: '{filtered} / {total} вакансий',
         noJobsFound: 'Не найдено вакансий по вашим фильтрам',
     },
+    footer: {
+        copyright: '© 2025 TRAVELGIG ❤️ LILY'
+    }
 };

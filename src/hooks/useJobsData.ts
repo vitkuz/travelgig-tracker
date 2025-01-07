@@ -18,14 +18,13 @@ export function useJobData(language: 'ru' | 'en' = 'en') {
                 const fetchedJobs = await fetchJobs();
                 const jobsWithFields = fetchedJobs.map(job => {
                     const domain = getDomain(job.viewMoreUrl);
-                    // const scrapedDaysAgo = getDaysAgo(job.scrapedDateTimestamp);
                     const scrapedDaysAgo = getRelativeDateForFilters(job.scrapedDateTimestamp, language);
                     return {
                         ...job,
                         domain,
                         scrapedDaysAgo
                     }
-                })
+                }).sort((a, b) => b.scrapedDateTimestamp - a.scrapedDateTimestamp);
                 // todo: add virtual filed here
                 setJobs(jobsWithFields);
                 setError(null);

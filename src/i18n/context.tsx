@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useCallback } from 'react';
+import React, { createContext, useContext, useCallback, useEffect } from 'react';
 import { en } from './translations/en';
 import { ru } from './translations/ru';
 import type { Language, LanguageContextType } from './types';
@@ -6,10 +6,24 @@ import { useLocalStorage } from '@/hooks/useLocalStorage';
 
 const translations = { en, ru };
 
+function getLanguageFromURL(): Language | null {
+    if (typeof window === 'undefined') return null;
+    const params = new URLSearchParams(window.location.search);
+    const lang = params.get('lang');
+    return (lang === 'en' || lang === 'ru') ? lang : null;
+}
+
 const LanguageContext = createContext<LanguageContextType | null>(null);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
     const [language, setLanguage] = useLocalStorage<Language>('language', 'en');
+
+    useEffect(() => {
+        const urlLang = getLanguageFromURL();
+        if (urlLang) {
+            setLanguage(urlLang);
+        }
+    }, [setLanguage]);
 
     const t = useCallback((key: string, params?: Record<string, string | number>) => {
         const keys = key.split('.');

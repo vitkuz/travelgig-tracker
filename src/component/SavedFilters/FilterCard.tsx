@@ -25,7 +25,7 @@ export function FilterCard({
                                isDeleting,
                                isTogglingNotification
                            }: FilterCardProps) {
-    const { t } = useTranslation();
+    const { t, language } = useTranslation();
     const { user } = useAuth();
 
     return (
@@ -41,7 +41,7 @@ export function FilterCard({
                         {
                             filter.createdAt && (
                                 <div className="text-muted">
-                                    {t('filters.createdAt', {date: formatDate(filter.createdAt)})}
+                                    {t('filters.createdAt', {date: formatDate(filter.createdAt, language)})}
                                 </div>
                             )
                         }

@@ -6,8 +6,9 @@ import type { Language } from '@/i18n/types';
 export function LanguageSwitch() {
     const { language, setLanguage } = useTranslation();
 
-    const toggleLanguage = () => {
+    const toggleLanguage = async () => {
         setLanguage(language === 'en' ? 'ru' : 'en');
+        // window.location.reload();
     };
 
     return (

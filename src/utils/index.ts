@@ -9,14 +9,9 @@ export function filterJobs(
     const normalizedQuery = filters.searchQuery.toLowerCase().trim();
 
     return jobs.filter(job => {
-        // const daysAgo = job.scrapedDaysAgo;
-        // const domain = getDomain(job.viewMoreUrl);
-
         const matchesSearch = !normalizedQuery || [
             job.title,
-            job.company,
-            job.location,
-            job.description
+            job.shortDescription
         ].some(field =>
             field?.toLowerCase().includes(normalizedQuery)
         );

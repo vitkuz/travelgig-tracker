@@ -49,7 +49,7 @@ export function Filters() {
             </div>
             <div className="mb-4 mt-4">
                 <div className="row g-3">
-                    <div className="col-md-3 d-flex">
+                    <div className="col-md-4 d-flex">
                         <Form.Control
                             type="text"
                             placeholder={t('filters.searchPlaceholder')}
@@ -58,7 +58,7 @@ export function Filters() {
                         />
                     </div>
 
-                    <div className="col-md-3 d-flex">
+                    <div className="col-md-2 d-flex">
                         <Form.Select
                             value={currentFilters.timeFilter ?? ''}
                             onChange={(e) => updateCurrentFilters({timeFilter: e.target.value || null})}

@@ -4,6 +4,8 @@ export type Job = {
     viewMoreUrl: string;
     salary?: string;
     type?: string;
+    industry?: string;
+    shortDescription?: string;
     location?: string;
     scrapedDateTimestamp: number;
     postDateTimestamp?: number;

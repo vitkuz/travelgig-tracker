@@ -9,7 +9,7 @@ const nextConfig: NextConfig = {
         AUTH_API: 'https://ipgz7wpkd3.execute-api.us-east-1.amazonaws.com/prod',
         USERS_API: 'https://ipgz7wpkd3.execute-api.us-east-1.amazonaws.com/prod',
         FILTERS_API: 'https://ipgz7wpkd3.execute-api.us-east-1.amazonaws.com/prod',
-        NEXT_PUBLIC_TELEGRAM_BOT_URL: 'https://t.me/vitkuz_payment_bot'
+        NEXT_PUBLIC_TELEGRAM_BOT_URL: 'https://t.me/travelgig_bot'
     }
 };
 

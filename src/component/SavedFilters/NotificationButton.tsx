@@ -1,6 +1,9 @@
 import React from 'react';
 import { Button, OverlayTrigger, Tooltip, Spinner } from 'react-bootstrap';
 import { useTranslation } from '@/i18n/context';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBell as faBellSolid } from '@fortawesome/free-solid-svg-icons';
+// import { faBell as faBellRegular } from '@fortawesome/free-regular-svg-icons';
 
 interface NotificationButtonProps {
     hasNotification: boolean;
@@ -46,7 +49,7 @@ export function NotificationButton({
                             {t('common.updating')}
                         </>
                     ) : (
-                        <>{t('notifications.toggle')}</>
+                        <FontAwesomeIcon icon={hasNotification ? faBellSolid : faBellSolid} />
                     )}
                 </Button>
             </span>

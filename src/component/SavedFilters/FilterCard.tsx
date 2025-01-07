@@ -5,6 +5,8 @@ import type { SavedFilter } from '@/types/filters';
 import { formatDate } from '@/utils/date';
 import { NotificationButton } from './NotificationButton';
 import { useTranslation } from '@/i18n/context';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch, faClock, faGlobe, faIndustry, faHeart, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 interface FilterCardProps {
     filter: SavedFilter;
@@ -72,7 +74,10 @@ export function FilterCard({
                                     {t('common.deleting')}
                                 </>
                             ) : (
-                                t('common.delete')
+                                <>
+                                    <FontAwesomeIcon icon={faTrash} className="me-1" />
+                                    {t('common.delete')}
+                                </>
                             )}
                         </Button>
                     </div>
@@ -82,19 +87,34 @@ export function FilterCard({
                     {/*<p className="mb-2">{t('filters.activeFilters')}</p>*/}
                     <div className="d-flex flex-wrap gap-2">
                         {filter.timeFilter && (
-                            <Badge bg="info">{t('filters.timeFilter')}: {filter.timeFilter}</Badge>
+                            <Badge bg="info" className="d-flex align-items-center gap-2">
+                                <FontAwesomeIcon icon={faClock} />
+                                {filter.timeFilter}
+                            </Badge>
                         )}
                         {filter.domainFilter && (
-                            <Badge bg="info">{t('filters.domainFilter')}: {filter.domainFilter}</Badge>
+                            <Badge bg="info" className="d-flex align-items-center gap-2">
+                                <FontAwesomeIcon icon={faGlobe} />
+                                {filter.domainFilter}
+                            </Badge>
                         )}
                         {filter.industryFilter && (
-                            <Badge bg="info">{t('filters.industryFilter')}: {filter.industryFilter}</Badge>
+                            <Badge bg="info" className="d-flex align-items-center gap-2">
+                                <FontAwesomeIcon icon={faIndustry} />
+                                {filter.industryFilter}
+                            </Badge>
                         )}
                         {filter.showLiked && (
-                            <Badge bg="info">{t('filters.likedOnly')}</Badge>
+                            <Badge bg="info" className="d-flex align-items-center gap-2">
+                                <FontAwesomeIcon icon={faHeart} />
+                                {t('filters.likedOnly')}
+                            </Badge>
                         )}
                         {filter.searchQuery && (
-                            <Badge bg="info">{t('filters.searchQuery')}: {filter.searchQuery}</Badge>
+                            <Badge bg="info" className="d-flex align-items-center gap-2">
+                                <FontAwesomeIcon icon={faSearch} />
+                                {filter.searchQuery}
+                            </Badge>
                         )}
                         {!filter.timeFilter && !filter.domainFilter && !filter.industryFilter && !filter.showLiked && !filter.searchQuery && (
                             <span className="text-muted">{t('filters.noActiveFilters')}</span>

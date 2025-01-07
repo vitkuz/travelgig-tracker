@@ -49,7 +49,7 @@ export const en = {
     notifications: {
         title: 'Notifications',
         toggle: '🔔 Notifications',
-        tooltip: 'Notification will be sent to telegram bot on daily basis. Cost of one notification is 1 dollar cent',
+        tooltip: 'Notification will be sent to telegram bot on daily basis. Cost of one notification is 1 telegram star',
     },
     jobs: {
         title: 'Jobs',

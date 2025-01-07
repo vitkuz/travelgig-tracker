@@ -57,7 +57,7 @@ export function SaveFilterButton({
         return (
             <OverlayTrigger
                 trigger={['hover', 'focus']}
-                placement="left"
+                placement="top"
                 overlay={popover}
             >
                 <span>{button}</span>

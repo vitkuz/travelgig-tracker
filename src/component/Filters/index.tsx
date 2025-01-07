@@ -25,6 +25,7 @@ export function Filters() {
         currentFilters.timeFilter ||
         currentFilters.domainFilter ||
         currentFilters.locationFilter ||
+        currentFilters.industryFilter ||
         currentFilters.showLiked;
 
     const handleSave = async (e: React.FormEvent) => {
@@ -93,6 +94,20 @@ export function Filters() {
                         >
                             <option value="">{t('filters.allLocations')}</option>
                             {filterOptions.locations.map(option => (
+                                <option key={option} value={option}>
+                                    {option}
+                                </option>
+                            ))}
+                        </Form.Select>
+                    </div>
+
+                    <div className="col-md-2 d-flex">
+                        <Form.Select
+                            value={currentFilters.industryFilter ?? ''}
+                            onChange={(e) => updateCurrentFilters({industryFilter: e.target.value || null})}
+                        >
+                            <option value="">{t('filters.allIndustries')}</option>
+                            {filterOptions.industries.map(option => (
                                 <option key={option} value={option}>
                                     {option}
                                 </option>

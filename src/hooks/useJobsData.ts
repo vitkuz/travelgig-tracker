@@ -45,6 +45,7 @@ export function useJobData(language: 'ru' | 'en' = 'en') {
     const domains = useMemo(() => extractUniqueValues(jobs, 'domain'), [jobs]);
     const daysAgo = useMemo(() => extractUniqueValues(jobs, 'scrapedDaysAgo'), [jobs]);
     const locations = useMemo(() => extractUniqueValues(jobs, 'location'), [jobs]);
+    const industries = useMemo(() => extractUniqueValues(jobs, 'industry'), [jobs]);
 
     return {
         jobs,
@@ -53,7 +54,8 @@ export function useJobData(language: 'ru' | 'en' = 'en') {
         filterOptions: {
             domains,
             daysAgo,
-            locations
+            locations,
+            industries
         }
     };
 }

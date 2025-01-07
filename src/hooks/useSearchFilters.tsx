@@ -10,6 +10,7 @@ const initialFilters: SearchFilters = {
     timeFilter: null,
     domainFilter: null,
     locationFilter: null,
+    industryFilter: null,
     showLiked: false,
     searchQuery: '',
 };
@@ -78,6 +79,7 @@ export function useSearchFilters() {
             timeFilter: filter.timeFilter,
             domainFilter: filter.domainFilter,
             locationFilter: filter.locationFilter,
+            industryFilter: filter.industryFilter,
             showLiked: filter.showLiked,
             searchQuery: filter.searchQuery,
         });

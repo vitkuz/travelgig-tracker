@@ -26,6 +26,7 @@ export function filterJobs(
             (!filters.timeFilter || job.scrapedDaysAgo === filters.timeFilter) &&
             (!filters.domainFilter || job.domain === filters.domainFilter) &&
             (!filters.locationFilter || job.location === filters.locationFilter) &&
+            (!filters.industryFilter || job.industry === filters.industryFilter) &&
             (!filters.showLiked || job.liked)
         );
     });

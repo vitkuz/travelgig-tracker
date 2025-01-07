@@ -28,6 +28,7 @@ export const en = {
         searchPlaceholder: 'Search jobs by title, company, or description...',
         allTime: 'All Time',
         allDomains: 'All domains',
+        allIndustries: 'All industries',
         allLocations: 'All locations',
         activeFilters: 'Active Filters',
         noActiveFilters: 'No active filters',

@@ -28,6 +28,7 @@ export const ru = {
         searchPlaceholder: 'Поиск вакансий по названию, компании или описанию...',
         allTime: 'Все время',
         allDomains: 'Все домены',
+        allIndustries: 'Все индустрии',
         allLocations: 'Все локации',
         activeFilters: 'Активные фильтры',
         noActiveFilters: 'Нет активных фильтров',

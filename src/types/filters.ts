@@ -2,6 +2,7 @@ export interface SearchFilters {
     timeFilter: string | null;
     domainFilter: string | null;
     locationFilter: string | null;
+    industryFilter: string | null;
     showLiked: boolean;
     searchQuery: string;
     id?: string;

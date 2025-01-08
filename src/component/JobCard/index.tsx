@@ -45,8 +45,14 @@ interface JobMetadataProps {
 function JobMetadata({ job }: JobMetadataProps) {
     return (
         <div className="d-flex flex-wrap gap-2 mb-3">
+            {job.industry && (
+                <Badge bg="warning" text="dark" className="d-flex align-items-center gap-1">
+                    <FontAwesomeIcon icon={faBuilding} size="sm" />
+                    {job.industry}
+                </Badge>
+            )}
             {job.location && (
-                <Badge bg="light" text="dark" className="d-flex align-items-center gap-1">
+                <Badge bg="dark" className="d-flex align-items-center gap-1">
                     <FontAwesomeIcon icon={faLocationDot} size="sm" />
                     {job.location}
                 </Badge>
@@ -61,12 +67,6 @@ function JobMetadata({ job }: JobMetadataProps) {
                 <Badge bg="light" text="dark" className="d-flex align-items-center gap-1">
                     <FontAwesomeIcon icon={faBriefcase} size="sm" />
                     {job.type}
-                </Badge>
-            )}
-            {job.industry && (
-                <Badge bg="light" text="dark" className="d-flex align-items-center gap-1">
-                    <FontAwesomeIcon icon={faBuilding} size="sm" />
-                    {job.industry}
                 </Badge>
             )}
             {job.shortDescription && (
@@ -125,8 +125,8 @@ export function JobCard({ job }: JobCardProps) {
                         size="sm"
                         className="ms-2 d-flex align-items-center gap-2"
                     >
-                        <FontAwesomeIcon icon={faExternalLink} size="sm" />
                         {t('jobs.openOn', { domain })}
+                        <FontAwesomeIcon icon={faExternalLink} size="sm" />
                     </Button>
                 </div>
             </Card.Body>

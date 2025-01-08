@@ -22,7 +22,9 @@ export function useJobData(language: 'ru' | 'en' = 'en') {
                     return {
                         ...job,
                         domain,
-                        scrapedDaysAgo
+                        scrapedDaysAgo,
+                        // @ts-ignore
+                        location: typeof job.location === 'object' && job.location !== null ? `${job.location.town}, ${job.location.country}` : job.location
                     }
                 }).sort((a, b) => b.scrapedDateTimestamp - a.scrapedDateTimestamp);
                 // todo: add virtual filed here

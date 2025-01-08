@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, memo, useCallback } from 'react';
 import { Card, Button, Badge, Collapse } from 'react-bootstrap';
 import { useTranslation } from '@/i18n/context';
 import type { JobWithInteraction } from "@/types";
@@ -12,7 +12,7 @@ interface JobHeaderProps {
     job: JobWithInteraction;
 }
 
-export function JobHeader({ job }: JobHeaderProps) {
+const JobHeader = memo(({ job }: JobHeaderProps) => {
     // const { handleLike, handleDislike } = useJobs();
 
     return (
@@ -36,13 +36,15 @@ export function JobHeader({ job }: JobHeaderProps) {
             </div>
         </div>
     );
-}
+});
+
+JobHeader.displayName = 'JobHeader';
 
 interface JobMetadataProps {
     job: JobWithInteraction;
 }
 
-function JobMetadata({ job }: JobMetadataProps) {
+const JobMetadata = memo(({ job }: JobMetadataProps) => {
     return (
         <div className="d-flex flex-wrap gap-2 mb-3">
             {job.industry && (
@@ -76,16 +78,24 @@ function JobMetadata({ job }: JobMetadataProps) {
             )}
         </div>
     );
-}
+});
+
+JobMetadata.displayName = 'JobMetadata';
 
 interface JobCardProps {
     job: JobWithInteraction;
 }
 
-export function JobCard({ job }: JobCardProps) {
+// eslint-disable-next-line react/display-name
+export const JobCard = memo(({ job }: JobCardProps) => {
+    console.log('Card is rendered', job.viewMoreUrl);
     const [open, setOpen] = useState(false);
-    const { t, language } = useTranslation();
+    const {t, language} = useTranslation();
     const domain = getDomain(job.viewMoreUrl);
+
+    const toggleOpen = useCallback(() => {
+        setOpen(prev => !prev);
+    }, []);
 
     return (
         <Card className="h-100 shadow-sm hover-shadow">
@@ -98,8 +108,8 @@ export function JobCard({ job }: JobCardProps) {
                 <div className="mb-3">
                     <Button
                         variant="link"
-                        onClick={() => setOpen(!open)}
-                        aria-controls="job-description"
+                        onClick={toggleOpen}
+                        aria-controls={`job-description-${job.viewMoreUrl}`}
                         aria-expanded={open}
                         className="p-0 d-flex align-items-center gap-2"
                     >
@@ -107,7 +117,7 @@ export function JobCard({ job }: JobCardProps) {
                         {open ? t('jobs.hideDetails') : t('jobs.showDetails')}
                     </Button>
                     <Collapse in={open}>
-                        <div id="job-description" className="mt-2">
+                        <div id={`job-description-${job.viewMoreUrl}`} className="mt-2">
                             {job.description}
                         </div>
                     </Collapse>
@@ -131,5 +141,5 @@ export function JobCard({ job }: JobCardProps) {
                 </div>
             </Card.Body>
         </Card>
-    );
-}
+    )
+});

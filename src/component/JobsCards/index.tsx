@@ -16,12 +16,9 @@ const JobCards = () => {
     const [searchQuery, setSearchQuery] = useState<string>("");
     const [debouncedQuery, setDebouncedQuery] = useState<string>("");
 
-    const updateSearchQuery = useCallback(
-        debounce((value: string) => {
-            setDebouncedQuery(value.toLowerCase());
-        }, 300),
-        []
-    );
+    const updateSearchQuery = debounce((value: string) => {
+        setDebouncedQuery(value.toLowerCase());
+    }, 300);
 
     const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;

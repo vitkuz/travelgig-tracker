@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, {useState, useCallback, useEffect} from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { useTranslation } from '@/i18n/context';
 import { useFilters } from "@/context/FilterContext";
 import { useJobs } from "@/context/JobContext";
+import { useDebounce } from '@/hooks/useDebounce';
 import { SaveFilterModal } from './SaveFilterModal';
 import { SaveFilterButton } from "@/component/SavedFilters/SaveFilterButton";
 
@@ -20,6 +21,16 @@ export function Filters() {
     const [filterName, setFilterName] = useState('');
     const [error, setError] = useState<string | null>(null);
     const [isSaving, setIsSaving] = useState(false);
+    const [searchInput, setSearchInput] = useState(currentFilters.searchQuery);
+    const debouncedSearch = useDebounce(searchInput);
+
+    const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchInput(e.target.value);
+    }, []);
+
+    useEffect(() => {
+        updateCurrentFilters({ searchQuery: debouncedSearch });
+    }, [debouncedSearch, updateCurrentFilters]);
 
     const hasActiveFilters = currentFilters.searchQuery ||
         currentFilters.timeFilter ||
@@ -54,8 +65,8 @@ export function Filters() {
                         <Form.Control
                             type="text"
                             placeholder={t('filters.searchPlaceholder')}
-                            value={currentFilters.searchQuery}
-                            onChange={(e) => updateCurrentFilters({searchQuery: e.target.value})}
+                            value={searchInput}
+                            onChange={handleSearchChange}
                         />
                     </div>
 

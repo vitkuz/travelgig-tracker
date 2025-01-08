@@ -2,13 +2,13 @@ import {JobWithInteraction} from "@/types";
 import {SearchFilters} from "@/types/filters";
 import {getDomain} from "@/utils/getDomain";
 
-export function filterJobs(
+export function shouldShowJob(
     jobs: JobWithInteraction[],
     filters: SearchFilters
-): JobWithInteraction[] {
+): Record<string, boolean> {
     const normalizedQuery = filters.searchQuery.toLowerCase().trim();
 
-    return jobs.filter(job => {
+    return jobs.reduce((acc, job) => {
         const matchesSearch = !normalizedQuery || [
             job.title,
             job.shortDescription
@@ -16,7 +16,7 @@ export function filterJobs(
             field?.toLowerCase().includes(normalizedQuery)
         );
 
-        return (
+        acc[job.viewMoreUrl] = <boolean>(
             matchesSearch &&
             (!filters.timeFilter || job.scrapedDaysAgo === filters.timeFilter) &&
             (!filters.domainFilter || job.domain === filters.domainFilter) &&
@@ -24,7 +24,8 @@ export function filterJobs(
             (!filters.industryFilter || job.industry === filters.industryFilter) &&
             (!filters.showLiked || job.liked)
         );
-    });
+        return acc;
+    }, {} as Record<string, boolean>);
 }
 
 export function extractDomains(jobs: JobWithInteraction[]): string[] {

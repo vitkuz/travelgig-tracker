@@ -23,7 +23,7 @@ export function useJobData(language: 'ru' | 'en' = 'en') {
                         ...job,
                         domain,
                         scrapedDaysAgo,
-                        // @ts-ignore
+                        // @ts-ignore //todo: fix types later
                         location: typeof job.location === 'object' && job.location !== null ? `${job.location.town}, ${job.location.country}` : job.location
                     }
                 }).sort((a, b) => b.scrapedDateTimestamp - a.scrapedDateTimestamp);

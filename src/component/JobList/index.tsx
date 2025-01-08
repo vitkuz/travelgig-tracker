@@ -5,7 +5,7 @@ import { useFilters } from "@/context/FilterContext";
 import { useTranslation } from '@/i18n/context';
 import { JobCard } from "@/component/JobCard";
 import { filterJobs } from "@/utils";
-import { JobSkeletonGrid } from '@/component/Skeleton/JobSkeleton';
+import { LoadingSpinner } from '@/component/LoadingSpinner';
 
 export function JobList() {
     const { jobs, isLoading, error } = useJobs();
@@ -15,7 +15,7 @@ export function JobList() {
     const filteredJobs = filterJobs(jobs, currentFilters);
 
     if (isLoading) {
-        return <JobSkeletonGrid />;
+        return <LoadingSpinner />;
     }
 
     if (error) {

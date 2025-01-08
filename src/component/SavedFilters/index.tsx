@@ -3,7 +3,7 @@ import {Row, Col, Badge} from 'react-bootstrap';
 import { useFilters } from '@/context/FilterContext';
 import { useTranslation } from '@/i18n/context';
 import { FilterCard } from './FilterCard';
-import { FilterSkeleton } from '@/component/Skeleton/FilterSkeleton';
+import { LoadingSpinner } from '@/component/LoadingSpinner';
 
 export function SavedFilters() {
     const {
@@ -37,15 +37,7 @@ export function SavedFilters() {
     };
 
     if (isLoading) {
-        return (
-            <Row xs={1} md={2} lg={3} className="g-4 mb-4">
-                {[...Array(3)].map((_, index) => (
-                    <Col key={index}>
-                        <FilterSkeleton />
-                    </Col>
-                ))}
-            </Row>
-        );
+        return <LoadingSpinner />;
     }
 
     return (

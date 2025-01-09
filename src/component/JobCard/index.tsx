@@ -3,7 +3,7 @@ import { Card, Button, Badge, Collapse } from 'react-bootstrap';
 import { useTranslation } from '@/i18n/context';
 import type { JobWithInteraction } from "@/types";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faLocationDot, faMoneyBill, faBriefcase, faBuilding, faChevronDown, faChevronUp, faExternalLink } from '@fortawesome/free-solid-svg-icons';
+import { faLocationDot, faMoneyBill, faBriefcase, faBuilding, faChevronDown, faChevronUp, faExternalLink, faListCheck } from '@fortawesome/free-solid-svg-icons';
 import { getDomain } from "@/utils/getDomain";
 import {getRelativeTime} from "@/utils/dateUtils";
 // import {useJobs} from "@/context/JobContext";
@@ -53,14 +53,19 @@ const JobMetadata = memo(({ job }: JobMetadataProps) => {
                     {job.industry}
                 </Badge>
             )}
-            {job.location && (
+            {typeof job.location === 'string' ? (
                 <Badge bg="dark" className="d-flex align-items-center gap-1">
                     <FontAwesomeIcon icon={faLocationDot} size="sm" />
                     {job.location}
                 </Badge>
+            ) : job.location && (
+                <Badge bg="dark" className="d-flex align-items-center gap-1">
+                    <FontAwesomeIcon icon={faLocationDot} />
+                    {`${job.location}`}
+                </Badge>
             )}
             {job.salary && (
-                <Badge bg="light" text="dark" className="d-flex align-items-center gap-1">
+                <Badge bg="success" className="d-flex align-items-center gap-1">
                     <FontAwesomeIcon icon={faMoneyBill} size="sm" />
                     {job.salary}
                 </Badge>
@@ -75,6 +80,16 @@ const JobMetadata = memo(({ job }: JobMetadataProps) => {
                 <p>
                     {job.shortDescription}
                 </p>
+            )}
+            {job.requiredSkills && job.requiredSkills.length > 0 && (
+                <ul className="list-unstyled mb-0 mt-0">
+                    {job.requiredSkills?.map((skill, index) => (
+                        <li key={skill} className="d-flex align-items-center gap-2 text-muted">
+                            <FontAwesomeIcon icon={faListCheck} size="sm" className="text-info" />
+                            {skill}
+                        </li>
+                    ))}
+                </ul>
             )}
         </div>
     );
@@ -117,8 +132,14 @@ export const JobCard = memo(({ job }: JobCardProps) => {
                         {open ? t('jobs.hideDetails') : t('jobs.showDetails')}
                     </Button>
                     <Collapse in={open}>
-                        <div id={`job-description-${job.viewMoreUrl}`} className="mt-2">
-                            {job.description}
+                        <div id={`job-description-${job.viewMoreUrl}`}>
+                            {/*{job.requiredSkills?.map((skill, index) => (*/}
+                            {/*    <Badge key={skill} bg="info" className="d-flex align-items-center gap-1">*/}
+                            {/*        <FontAwesomeIcon icon={faListCheck} />*/}
+                            {/*        {skill}*/}
+                            {/*    </Badge>*/}
+                            {/*))}*/}
+                            <p>{job.description}</p>
                         </div>
                     </Collapse>
                 </div>

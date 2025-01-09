@@ -22,6 +22,11 @@ export function Filters() {
     const [error, setError] = useState<string | null>(null);
     const [isSaving, setIsSaving] = useState(false);
     const [searchInput, setSearchInput] = useState(currentFilters.searchQuery);
+
+    useEffect(() => {
+        setSearchInput(currentFilters.searchQuery);
+    }, [currentFilters.searchQuery]);
+
     const debouncedSearch = useDebounce(searchInput);
 
     const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {

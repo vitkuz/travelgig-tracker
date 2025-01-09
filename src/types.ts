@@ -5,6 +5,7 @@ export type Job = {
     salary?: string;
     type?: string;
     industry?: string;
+    requiredSkills?: string[];
     shortDescription?: string;
     location?: string;
     scrapedDateTimestamp: number;

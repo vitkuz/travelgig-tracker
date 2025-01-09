@@ -6,16 +6,23 @@ import {SavedFilters} from "@/component/SavedFilters";
 import {Navbar} from "@/component/Navbar";
 import {Footer} from "@/component/Footer";
 import ScrollToTop from "react-scroll-to-top";
+import {useJobs} from "@/context/JobContext";
 
 function HomePageContent() {
+    const { isLoading } = useJobs();
+
     return (
         <div className="min-vh-100 d-flex flex-column">
             <Navbar/>
             <Container>
                 <Row>
                     <Col md={12}>
-                        <SavedFilters/>
-                        <Filters/>
+                        {!isLoading && (
+                            <>
+                                <SavedFilters/>
+                                <Filters/>
+                            </>
+                        )}
                         <JobList/>
                     </Col>
                 </Row>

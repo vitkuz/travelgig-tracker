@@ -23,8 +23,10 @@ export function useJobData(language: 'ru' | 'en' = 'en') {
                         ...job,
                         domain,
                         scrapedDaysAgo,
-                        // @ts-expect-error //todo: fix types later
-                        location: typeof job.location === 'object' && job.location !== null ? `${job.location.town}, ${job.location.country}` : job.location
+                        location: typeof job.location === 'object' && job.location !== null
+                            // @ts-expect-error //todo: fix types later
+                            ? [job.location.town, job.location.country].filter(Boolean).join(', ')
+                            : job.location
                     }
                 }).sort((a, b) => b.scrapedDateTimestamp - a.scrapedDateTimestamp);
                 // todo: add virtual filed here
